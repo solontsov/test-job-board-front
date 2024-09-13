@@ -7,7 +7,14 @@ function App() {
   const [search, setSearch] = useState("");
 
   function update() {
-    fetch("http://localhost:1337/api/jobslists")
+    fetch("http://localhost:1337/api/joblists", {
+      method: "GET",
+      headers: {
+        Authorization:
+          "Bearer bc55770e85deaa8c54d32ff42d8df040a99d1327f43217fcabcce6f47845818cf366ddf18be562be4827a0dd2f02c47736231c734c6086a68d288eda44790aec8d303b2e67740ba070199c137b9b5d09087ce674de7a64f106b921fe62ffe6086fcf2156dd11f9e1879883933cf5412866134e7b14dac33a9fc8c6544aa4f5df",
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => res.json())
       .then((todo) => {
         //  setTodos(todo.data); to prevent crash when data is empty

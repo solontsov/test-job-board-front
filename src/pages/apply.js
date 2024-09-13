@@ -12,7 +12,14 @@ function Apply() {
 
 
  const update  = async () =>  {
-   fetch("http://localhost:1337/api/jobslists/"+jobid)
+   fetch("http://localhost:1337/api/joblists/"+jobid , {
+    method: "GET",
+    headers: {
+      Authorization:
+        "Bearer bc55770e85deaa8c54d32ff42d8df040a99d1327f43217fcabcce6f47845818cf366ddf18be562be4827a0dd2f02c47736231c734c6086a68d288eda44790aec8d303b2e67740ba070199c137b9b5d09087ce674de7a64f106b921fe62ffe6086fcf2156dd11f9e1879883933cf5412866134e7b14dac33a9fc8c6544aa4f5df",
+      "Content-Type": "application/json",
+    },
+  })
      .then(res => res.json())
      .then(job_info => {
        setJob(job_info.data.attributes);
@@ -24,10 +31,12 @@ function Apply() {
    console.log(job);
  }, [])
 
- const subbmit = async () => {
+ const submit = async () => {
    const requestOptions = {
        method: 'POST',
-       headers: { 'Content-Type': 'application/json' },
+       headers: { Authorization:
+        "Bearer bc55770e85deaa8c54d32ff42d8df040a99d1327f43217fcabcce6f47845818cf366ddf18be562be4827a0dd2f02c47736231c734c6086a68d288eda44790aec8d303b2e67740ba070199c137b9b5d09087ce674de7a64f106b921fe62ffe6086fcf2156dd11f9e1879883933cf5412866134e7b14dac33a9fc8c6544aa4f5df",
+        'Content-Type': 'application/json' },
        body: JSON.stringify({
            "data": {
                "Name": fullname,
@@ -43,7 +52,7 @@ function Apply() {
    fetch('http://localhost:1337/api/applicantlists', requestOptions)
        .then(response => response.json())
 
-   alert("Application Submited Successful...");
+   alert("Application Submitted Successful...");
 }
 
  return (
@@ -115,7 +124,7 @@ function Apply() {
                            <textarea name="" onChange={(event) => setMessage(event.target.value)} className="form-control"  rows="6" placeholder="Tell us more about you and your experience" style={{borderRadius:'10px'}}></textarea>
                            <br/>
                          
-                           <input type="button" onClick={() => subbmit()} className="form-control" value="Submit" />
+                           <input type="button" onClick={() => submit()} className="form-control" value="Submit" />
                      
 
                        </div>
